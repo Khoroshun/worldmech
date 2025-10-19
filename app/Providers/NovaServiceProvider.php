@@ -20,6 +20,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         //
     }
 
+    protected function resources(): void
+    {
+        Nova::resources([
+            \App\Nova\Material::class,
+            \App\Nova\Constant::class,
+        ]);
+    }
+
     /**
      * Register the configurations for Laravel Fortify.
      */
