@@ -3,7 +3,6 @@
 namespace App\Nova;
 
 use App\Models\Dataset as DatasetModel;
-use App\Nova\Cards\DatasetGraph;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
@@ -62,15 +61,6 @@ class Dataset extends Resource
         ];
     }
 
-    /**
-     * Get the cards available for the request.
-     */
-    public function cards(NovaRequest $request): array
-    {
-        return [
-            (new DatasetGraph())->onlyOnDetail(),
-        ];
-    }
 
     public static function label(): string
     {
