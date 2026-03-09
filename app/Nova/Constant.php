@@ -34,10 +34,14 @@ class Constant extends Resource
 
             Number::make('B (MPa⁻ⁿ/h)', 'b')
                 ->step('any')
+                ->help('Example: 5.26e-27')
+                ->displayUsing(fn($v) => $this->scientific($v))
                 ->nullable(),
 
             Number::make('D (MPa⁻ᵐ/h)', 'd')
                 ->step('any')
+                ->help('Example: 5.26e-27')
+                ->displayUsing(fn($v) => $this->scientific($v))
                 ->nullable(),
 
             Number::make('n')
@@ -66,6 +70,25 @@ class Constant extends Resource
         ];
     }
 
+    protected function scientific($value)
+    {
+        if ($value === null || $value == 0) {
+            return $value;
+        }
+
+        $exp = floor(log10(abs($value)));
+        $mantissa = $value / pow(10, $exp);
+
+        $superscript = [
+            '-' => '⁻',
+            '0'=>'⁰','1'=>'¹','2'=>'²','3'=>'³','4'=>'⁴',
+            '5'=>'⁵','6'=>'⁶','7'=>'⁷','8'=>'⁸','9'=>'⁹'
+        ];
+
+        $exp = strtr((string)$exp, $superscript);
+
+        return sprintf('%.3f × 10%s', $mantissa, $exp);
+    }
     public static function label() { return 'Constants'; }
     public static function singularLabel() { return 'Constant'; }
 }

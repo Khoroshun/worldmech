@@ -14,11 +14,13 @@ class Constant extends Model
     ];
 
     protected $casts = [
-        'n' => 'float',
-        'k' => 'float',
-        'm' => 'float',
-        'l' => 'float',
+        'b' => 'float',
+        'd' => 'float',
         'temperature' => 'float',
+        'n' => 'float',
+        'l' => 'float',
+        'm' => 'float',
+        'k' => 'float',
         'a' => 'float',
     ];
 
