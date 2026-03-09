@@ -25,8 +25,6 @@ class Dataset extends Resource
     public function fields(NovaRequest $request): array
     {
         return [
-            ID::make()->sortable(),
-
             Text::make('Title')
                 ->rules('required', 'max:255')
                 ->sortable(),
