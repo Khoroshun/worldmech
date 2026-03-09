@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Models\DataPoint as DataPointModel;
+use App\Support\ScientificFormatter;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -31,7 +32,9 @@ class DataPoint extends Resource
                 ->rules('required', 'numeric'),
 
             Number::make('Y Value', 'y_value')
-                ->step(0.0000001)
+                ->step('any')
+                ->help('Example: 5.26e-27')
+                ->displayUsing(fn($v) => ScientificFormatter::format($v))
                 ->rules('required', 'numeric'),
         ];
     }
