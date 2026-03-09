@@ -21,6 +21,31 @@ class DataPoint extends Resource
 
     public static $perPageViaRelationship = 20;
 
+    public static function indexQuery(NovaRequest $request, $query): \Illuminate\Contracts\Database\Eloquent\Builder
+    {
+        return $query->orderBy('x_value', 'asc');
+    }
+
+    public function actions(NovaRequest $request)
+    {
+        return [];
+    }
+
+    public static function authorizedToUpdate(Request $request, $model)
+    {
+        return false;
+    }
+
+    public static function authorizedToDelete(Request $request, $model)
+    {
+        return false;
+    }
+
+    public static function authorizedToView(Request $request, $model)
+    {
+        return false;
+    }
+
     public function fields(NovaRequest $request): array
     {
         return [
