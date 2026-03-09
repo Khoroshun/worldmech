@@ -22,6 +22,8 @@ class Constant extends Resource
     public function fields(Request $request): array
     {
         return [
+            ID::make()->sortable()->hideFromIndex(),
+
             BelongsTo::make('Material', 'material', Material::class)
                 ->nullable()
                 ->searchable(),

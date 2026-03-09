@@ -21,14 +21,11 @@ class DataPoint extends Resource
 
     public static $perPageViaRelationship = 20;
 
-    public static function indexQuery(NovaRequest $request, $query): \Illuminate\Contracts\Database\Eloquent\Builder
-    {
-        return $query->orderBy('id', 'desc');
-    }
-
     public function fields(NovaRequest $request): array
     {
         return [
+            ID::make()->sortable()->hideFromIndex(),
+
             BelongsTo::make('Dataset', 'dataset', Dataset::class)
                 ->rules('required'),
 
