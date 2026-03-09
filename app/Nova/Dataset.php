@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use App\Models\Dataset as DatasetModel;
+use Coroowicaksono\ChartJsIntegration\StackedChart;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
@@ -71,5 +73,31 @@ class Dataset extends Resource
     {
         return 'Dataset';
     }
+
+    public function cards(Request $request)
+    {
+        return [
+            (new StackedChart())
+                ->title('Revenue')
+                ->series(array([
+                    'barPercentage' => 0.5,
+                    'label' => 'Product #1',
+                    'backgroundColor' => '#ffcc5c',
+                    'data' => [30, 70, 80],
+                ],[
+                    'barPercentage' => 0.5,
+                    'label' => 'Product #2',
+                    'backgroundColor' => '#ff6f69',
+                    'data' => [40, 62, 79],
+                ]))
+                ->options([
+                    'xaxis' => [
+                        'categories' => [ 'Jan', 'Feb', 'Mar' ]
+                    ],
+                ])
+                ->width('1/3'),
+        ];
+    }
+
 }
 

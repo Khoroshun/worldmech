@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Coroowicaksono\ChartJsIntegration\StackedChart;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Fortify\Features;
 use Laravel\Nova\Nova;
@@ -20,6 +21,31 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::style('custom-nova', resource_path('css/nova.css'));
     }
 
+    public function cards(): array
+    {
+        return [
+            (new StackedChart())
+                ->title('Revenue')
+                ->series(array([
+                    'barPercentage' => 0.5,
+                    'label' => 'Product #1',
+                    'backgroundColor' => '#ffcc5c',
+                    'data' => [30, 70, 80],
+                ],[
+                    'barPercentage' => 0.5,
+                    'label' => 'Product #2',
+                    'backgroundColor' => '#ff6f69',
+                    'data' => [40, 62, 79],
+                ]))
+                ->options([
+                    'xaxis' => [
+                        'categories' => [ 'Jan', 'Feb', 'Mar' ]
+                    ],
+                ])
+                ->width('1/3'),
+
+        ];
+    }
     protected function resources(): void
     {
         Nova::resources([
