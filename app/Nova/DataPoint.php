@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use App\Models\DataPoint as DataPointModel;
 use App\Support\ScientificFormatter;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
