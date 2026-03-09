@@ -49,17 +49,22 @@ class DataPoint extends Resource
 
     public function fields(NovaRequest $request): array
     {
+        $dataset = $this->resource?->dataset;
+
+        $xLabel = $dataset?->x_label ?? 'X';
+        $yLabel = $dataset?->y_label ?? 'Y';
+
         return [
             ID::make()->sortable()->hideFromIndex(),
 
             BelongsTo::make('Dataset', 'dataset', Dataset::class)
                 ->rules('required'),
 
-            Number::make('X Value', 'x_value')
+            Number::make($xLabel, 'x_value')
                 ->step(0.0000001)
                 ->rules('required', 'numeric'),
 
-            Number::make('Y Value', 'y_value')
+            Number::make($yLabel, 'y_value')
                 ->step('any')
                 ->help('Example: 5.26e-27')
                 ->displayUsing(fn($v) => ScientificFormatter::format($v))
