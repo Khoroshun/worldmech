@@ -37,11 +37,6 @@ class DataPoint extends Resource
         return false;
     }
 
-    public function authorizedToUpdate($request)
-    {
-        return false;
-    }
-
     public function authorizedToDelete($request)
     {
         return false;
@@ -51,8 +46,8 @@ class DataPoint extends Resource
     {
         $dataset = $this->resource?->dataset;
 
-        $xLabel = $dataset?->x_label ?? 'X';
-        $yLabel = $dataset?->y_label ?? 'Y';
+        $xLabel = $dataset?->x_label . ', ' . $dataset?->x_unit ?? 'X';
+        $yLabel = $dataset?->y_label . ', ' . $dataset?->y_unit ?? 'Y';
 
         return [
             ID::make()->sortable()->hideFromIndex(),

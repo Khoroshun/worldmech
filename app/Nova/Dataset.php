@@ -38,11 +38,11 @@ class Dataset extends Resource
                 ->rules('required', 'max:255')
                 ->default('Temperature'),
 
-            Text::make('Y Label', 'y_label')
-                ->rules('required', 'max:255'),
-
             Text::make('X Unit', 'x_unit')
                 ->nullable(),
+
+            Text::make('Y Label', 'y_label')
+                ->rules('required', 'max:255'),
 
             Text::make('Y Unit', 'y_unit')
                 ->nullable(),
