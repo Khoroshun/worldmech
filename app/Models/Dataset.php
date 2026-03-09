@@ -27,7 +27,7 @@ class Dataset extends Model
 
     public function dataPoints(): HasMany
     {
-        return $this->hasMany(DataPoint::class)->orderBy('x_value', 'desc');
+        return $this->hasMany(DataPoint::class)->orderBy('x_value', 'asc');
     }
 }
 
