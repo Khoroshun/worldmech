@@ -19,6 +19,8 @@ class DataPoint extends Resource
         'id',
     ];
 
+    public static $perPageViaRelationship = 20;
+
     public function fields(NovaRequest $request): array
     {
         return [
