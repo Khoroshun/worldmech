@@ -32,17 +32,17 @@ class DataPoint extends Resource
         return [];
     }
 
-    public static function authorizedToUpdate(Request $request, $model)
+    public function authorizedToView($request)
     {
         return false;
     }
 
-    public static function authorizedToDelete(Request $request, $model)
+    public function authorizedToUpdate($request)
     {
         return false;
     }
 
-    public static function authorizedToView(Request $request, $model)
+    public function authorizedToDelete($request)
     {
         return false;
     }
