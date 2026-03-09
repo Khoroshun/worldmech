@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Fortify\Features;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
-use Vendor\UniversalGraphTool\UniversalGraphTool;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -18,7 +17,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
-        //
+        Nova::style('custom-nova', resource_path('css/nova.css'));
     }
 
     protected function resources(): void
