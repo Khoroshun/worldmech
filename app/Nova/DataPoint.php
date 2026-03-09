@@ -23,7 +23,7 @@ class DataPoint extends Resource
 
     public static function indexQuery(NovaRequest $request, $query): \Illuminate\Contracts\Database\Eloquent\Builder
     {
-        return $query->orderBy('id', 'asc');
+        return $query->orderBy('id', 'desc');
     }
 
     public function fields(NovaRequest $request): array
