@@ -19,6 +19,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
 
         Nova::style('custom-nova', resource_path('css/nova.css'));
+        Nova::script('dataset-chart', resource_path('js/nova-dataset-chart.js'));
     }
 
     public function cards(): array

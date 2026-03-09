@@ -3,8 +3,11 @@
 namespace App\Nova;
 
 use App\Models\Dataset as DatasetModel;
+use App\Nova\Charts\DatasetChart;
 use Coroowicaksono\ChartJsIntegration\StackedChart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Js;
+use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
@@ -59,6 +62,24 @@ class Dataset extends Resource
                 ->sortable()
                 ->default('log'),
 
+
+            Text::make('Graph')
+                ->asHtml()
+                ->onlyOnDetail()
+                ->resolveUsing(function () {
+
+                    $points = $this->dataPoints()
+                        ->orderBy('x_value')
+                        ->get(['x_value','y_value']);
+
+                    return '
+                    <div style="height:400px">
+                        <canvas id="datasetChart"
+                            data-points=\''.Js::encode($points).'\'>
+                        </canvas>
+                    </div>';
+                }),
+
             HasMany::make('Data Points', 'dataPoints', DataPoint::class),
         ];
     }
@@ -74,29 +95,9 @@ class Dataset extends Resource
         return 'Dataset';
     }
 
-    public function cards(Request $request)
+    public function cards(NovaRequest $request): array
     {
-        return [
-            (new StackedChart())
-                ->title('Revenue')
-                ->series(array([
-                    'barPercentage' => 0.5,
-                    'label' => 'Product #1',
-                    'backgroundColor' => '#ffcc5c',
-                    'data' => [30, 70, 80],
-                ],[
-                    'barPercentage' => 0.5,
-                    'label' => 'Product #2',
-                    'backgroundColor' => '#ff6f69',
-                    'data' => [40, 62, 79],
-                ]))
-                ->options([
-                    'xaxis' => [
-                        'categories' => [ 'Jan', 'Feb', 'Mar' ]
-                    ],
-                ])
-                ->width('1/3'),
-        ];
+        return [];
     }
 
 }
