@@ -43,7 +43,9 @@ function initDatasetChart() {
                 backgroundColor: "#2563eb",
                 showLine: true,
                 fill: false,
-                tension: 0
+
+                cubicInterpolationMode: "monotone",
+                tension: 0.35
             }]
         },
         options: {
