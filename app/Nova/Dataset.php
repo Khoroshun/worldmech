@@ -62,6 +62,7 @@ class Dataset extends Resource
                 ->sortable()
                 ->default('log'),
 
+            HasMany::make('Data Points', 'dataPoints', DataPoint::class),
 
             Text::make('Graph')
                 ->asHtml()
@@ -72,15 +73,24 @@ class Dataset extends Resource
                         ->orderBy('x_value')
                         ->get(['x_value','y_value']);
 
-                    return '
-                    <div style="height:400px">
-                        <canvas id="datasetChart"
-                            data-points=\''.Js::encode($points).'\'>
-                        </canvas>
-                    </div>';
-                }),
+                    $meta = [
+                        'points' => $points,
+                        'x_label' => $this->x_label,
+                        'y_label' => $this->y_label,
+                        'x_unit' => $this->x_unit,
+                        'y_unit' => $this->y_unit,
+                        'scale_type' => $this->scale_type,
+                    ];
 
-            HasMany::make('Data Points', 'dataPoints', DataPoint::class),
+                    return '
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div style="position:relative;height:450px;width:100%">
+    <canvas id="datasetChart"
+        data-chart=\''.Js::encode($meta).'\'>
+    </canvas>
+</div>';
+                }),
         ];
     }
 
