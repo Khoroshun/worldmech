@@ -20,6 +20,11 @@ class DataPoint extends Resource
         'id',
     ];
 
+    public static function searchable(): bool
+    {
+        return false;
+    }
+
     public static $perPageViaRelationship = 20;
 
     public static function indexQuery(NovaRequest $request, $query): \Illuminate\Contracts\Database\Eloquent\Builder
@@ -57,10 +62,12 @@ class DataPoint extends Resource
 
             Number::make($xLabel, 'x_value')
                 ->step(0.0000001)
+                ->textAlign('left')
                 ->rules('required', 'numeric'),
 
             Number::make($yLabel, 'y_value')
                 ->step('any')
+                ->textAlign('left')
                 ->help('Example: 5.26e-27')
                 ->displayUsing(fn($v) => ScientificFormatter::format($v))
                 ->rules('required', 'numeric'),
