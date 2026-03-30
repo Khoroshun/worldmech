@@ -39,10 +39,17 @@ function initDatasetChart() {
             datasets: [{
                 label: chartData.y_label,
                 data: datasetPoints,
-                borderColor: "#2563eb",
-                backgroundColor: "#2563eb",
+
+                borderColor: "#0ea5e9",
+                backgroundColor: "#0ea5e9",
+
                 showLine: true,
                 fill: false,
+
+                borderWidth: 2,
+
+                pointRadius: 4,
+                pointBackgroundColor: "#0ea5e9",
 
                 cubicInterpolationMode: "monotone",
                 tension: 0.35
@@ -65,11 +72,25 @@ function initDatasetChart() {
             plugins: {
                 legend: {
                     display: true,
-                    position: "top"
+                    position: "top",
+                    labels: {
+                        color: "#000",
+                        font: {
+                            size: 16,
+                            weight: "bold"
+                        }
+                    }
                 },
                 tooltip: {
                     mode: "nearest",
-                    intersect: false
+                    intersect: false,
+                    titleFont: {
+                        size: 14,
+                        weight: "bold"
+                    },
+                    bodyFont: {
+                        size: 13
+                    }
                 }
             },
 
@@ -87,19 +108,27 @@ function initDatasetChart() {
                     title: {
                         display: true,
                         text: xLabel,
+                        color: "#000",
                         font: {
-                            size: 14,
+                            size: 24,
                             weight: "bold"
                         }
                     },
 
                     grid: {
-                        display: true
+                        display: true,
+                        color: "#000",
+                        lineWidth: 0.5
                     },
 
                     ticks: {
                         autoSkip: true,
-                        maxRotation: 0
+                        maxRotation: 0,
+                        color: "#000",
+                        font: {
+                            size: 18,
+                            weight: "bold"
+                        }
                     }
                 },
 
@@ -109,18 +138,26 @@ function initDatasetChart() {
                     title: {
                         display: true,
                         text: yLabel,
+                        color: "#000",
                         font: {
-                            size: 14,
+                            size: 18,
                             weight: "bold"
                         }
                     },
 
                     grid: {
-                        display: true
+                        display: true,
+                        color: "#000",
+                        lineWidth: 0.5
                     },
 
                     ticks: {
-                        autoSkip: true
+                        autoSkip: true,
+                        color: "#000",
+                        font: {
+                            size: 18,
+                            weight: "bold"
+                        }
                     }
                 }
 
