@@ -61,8 +61,10 @@ class DataPoint extends Resource
                 ->rules('required'),
 
             Number::make($xLabel, 'x_value')
-                ->step(0.0000001)
+                ->step('any')
                 ->textAlign('left')
+                ->help('Example: 5.26e-27')
+                ->displayUsing(fn($v) => ScientificFormatter::format($v))
                 ->rules('required', 'numeric'),
 
             Number::make($yLabel, 'y_value')

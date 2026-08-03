@@ -133,7 +133,7 @@ function initDatasetChart() {
                 },
 
                 y: {
-                    type: "linear",
+                    type: scaleType,
 
                     title: {
                         display: true,
